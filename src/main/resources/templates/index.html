@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Forecast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .weather-icon {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<h2>Forecast for the next 7 days</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Icon</th>
+        <th>Maks temperature (°C)</th>
+        <th>Min temperature (°C)</th>
+        <th>Photovoltaic energy (kWh)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="day, iterStat : ${weatherInfo}">
+        <td th:text="${day.date()}"></td>
+        <td><i class="weather-icon" th:class="'fas fa-' + ${icons.get(day.weatherCode())}"></i></td>
+        <td th:text="${day.maxTemperature()}"></td>
+        <td th:text="${day.minTemperature()}"></td>
+        <td th:text="${day.generatedEnergyKWh()}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
